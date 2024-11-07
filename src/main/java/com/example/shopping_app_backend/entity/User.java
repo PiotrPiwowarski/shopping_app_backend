@@ -30,6 +30,8 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;
+    @OneToMany(mappedBy = "user")
+    private List<Item> items;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

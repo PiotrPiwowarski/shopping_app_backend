@@ -34,6 +34,13 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @Operation(summary = "Usunięcie użytkownika po id")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
+
     @Operation(summary = "Zalogowanie")
     @PostMapping("/login")
     public ResponseEntity<Authentication> login(@RequestBody EmailAndPassword emailAndPassword) {

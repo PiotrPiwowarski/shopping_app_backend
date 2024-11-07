@@ -12,4 +12,6 @@ public interface UserService {
     void addNewUser(NewUser newUser);
     GetUser getUser(long id);
     Authentication login(EmailAndPassword emailAndPassword);
+    void deleteUser(long id);
+
 }

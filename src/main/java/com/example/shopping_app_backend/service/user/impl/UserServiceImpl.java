@@ -7,6 +7,7 @@ import com.example.shopping_app_backend.dto.NewUser;
 import com.example.shopping_app_backend.entity.Token;
 import com.example.shopping_app_backend.entity.User;
 import com.example.shopping_app_backend.exceptions.NoUsersWithSuchIdException;
+import com.example.shopping_app_backend.exceptions.UnauthorizedActionException;
 import com.example.shopping_app_backend.exceptions.UserWithSuchEmailAlreadyExists;
 import com.example.shopping_app_backend.mapper.UserMapper;
 import com.example.shopping_app_backend.repository.TokenRepository;
@@ -16,6 +17,7 @@ import com.example.shopping_app_backend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +67,16 @@ public class UserServiceImpl implements UserService {
         return Authentication.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    @Override
+    public void deleteUser(long id) {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findById(id).orElseThrow(NoUsersWithSuchIdException::new);
+        if(!name.equals(user.getEmail())) {
+            throw new UnauthorizedActionException();
+        }
+        userRepository.delete(user);
     }
 
     private void saveUserToken(String jwtToken, User user) {
