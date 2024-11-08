@@ -13,8 +13,6 @@ public final class UserMapper {
 
     public static User map(NewUser newUser, PasswordEncoder passwordEncoder) {
         return User.builder()
-                .firstName(newUser.getFirstName())
-                .lastName(newUser.getLastName())
                 .email(newUser.getEmail())
                 .password(passwordEncoder.encode(newUser.getPassword()))
                 .role(Role.USER)
@@ -24,8 +22,6 @@ public final class UserMapper {
     public static GetUser map(User user) {
         return GetUser.builder()
                 .id(user.getId())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
                 .email(user.getEmail())
                 .role(user.getRole())
                 .build();

@@ -24,8 +24,6 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
     private String email;
     private String password;
     @Enumerated(value = EnumType.STRING)
