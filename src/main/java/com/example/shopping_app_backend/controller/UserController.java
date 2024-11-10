@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(allowedHeaders = "*", origins = "*")
 public class UserController {
 
+
     private final UserService userService;
 
     @Operation(summary = "Dodanie nowego użytkownika")
