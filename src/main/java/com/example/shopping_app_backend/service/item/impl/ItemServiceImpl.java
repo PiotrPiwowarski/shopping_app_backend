@@ -27,7 +27,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void add(NewItem newItem) {
-        Item item = ItemMapper.map(newItem);
+        User user = userRepository.findById(newItem.getUserId()).orElseThrow(NoUsersWithSuchIdException::new);
+        Item item = ItemMapper.map(newItem, user);
         itemRepository.save(item);
     }
 

@@ -35,14 +35,14 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "Dodanie nowego produktu")
+    @Operation(summary = "Pobranie listy produktów użytkownika")
     @GetMapping("/{userId}")
     public ResponseEntity<List<Item>> getAllUserItems(@PathVariable long userId) {
         List<Item> items = itemService.getAllUserItems(userId);
         return ResponseEntity.ok(items);
     }
 
-    @Operation(summary = "Dodanie nowego produktu")
+    @Operation(summary = "Aktualizacja produktu")
     @PutMapping
     public ResponseEntity<Void> updateItem(@RequestBody ProductToUpdate productToUpdate) {
         itemService.updateItem(productToUpdate);

@@ -65,6 +65,7 @@ public class UserServiceImpl implements UserService {
         tokenRepository.deleteAllByUser(user);
         saveUserToken(jwtToken, user);
         return Authentication.builder()
+                .user(user)
                 .token(jwtToken)
                 .build();
     }

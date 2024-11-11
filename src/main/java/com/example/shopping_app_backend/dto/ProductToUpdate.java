@@ -17,7 +17,7 @@ public class ProductToUpdate {
     private String shop;
     private String productName;
     private BigDecimal price;
-    private int amount;
+    private BigDecimal amount;
     private String description;
     private String imageUrl;
 }
