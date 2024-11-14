@@ -1,5 +1,6 @@
 package com.example.shopping_app_backend.mapper;
 
+import com.example.shopping_app_backend.dto.GetItem;
 import com.example.shopping_app_backend.dto.NewItem;
 import com.example.shopping_app_backend.entity.Item;
 import com.example.shopping_app_backend.entity.User;
@@ -20,6 +21,19 @@ public class ItemMapper {
                 .description(newItem.getDescription())
                 .imageUrl(newItem.getImageUrl())
                 .user(user)
+                .build();
+    }
+
+    public static GetItem map(Item item) {
+        return GetItem.builder()
+                .id(item.getId())
+                .shop(item.getShop())
+                .productName(item.getProductName())
+                .price(item.getPrice())
+                .amount(item.getAmount())
+                .description(item.getDescription())
+                .imageUrl(item.getImageUrl())
+                .userId(item.getUser().getId())
                 .build();
     }
 }

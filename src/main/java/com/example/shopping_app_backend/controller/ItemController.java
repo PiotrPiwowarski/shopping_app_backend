@@ -2,7 +2,7 @@ package com.example.shopping_app_backend.controller;
 
 import com.example.shopping_app_backend.dto.NewItem;
 import com.example.shopping_app_backend.dto.ProductToUpdate;
-import com.example.shopping_app_backend.entity.Item;
+import com.example.shopping_app_backend.dto.GetItem;
 import com.example.shopping_app_backend.service.item.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -37,8 +37,8 @@ public class ItemController {
 
     @Operation(summary = "Pobranie listy produktów użytkownika")
     @GetMapping("/{userId}")
-    public ResponseEntity<List<Item>> getAllUserItems(@PathVariable long userId) {
-        List<Item> items = itemService.getAllUserItems(userId);
+    public ResponseEntity<List<GetItem>> getAllUserItems(@PathVariable long userId) {
+        List<GetItem> items = itemService.getAllUserItems(userId);
         return ResponseEntity.ok(items);
     }
 

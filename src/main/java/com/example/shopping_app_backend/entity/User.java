@@ -28,7 +28,7 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Item> items;
 
     @Override

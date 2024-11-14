@@ -1,5 +1,6 @@
 package com.example.shopping_app_backend.service.item.impl;
 
+import com.example.shopping_app_backend.dto.GetItem;
 import com.example.shopping_app_backend.dto.NewItem;
 import com.example.shopping_app_backend.dto.ProductToUpdate;
 import com.example.shopping_app_backend.entity.Item;
@@ -44,9 +45,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> getAllUserItems(long userId) {
+    public List<GetItem> getAllUserItems(long userId) {
         User user = userRepository.findById(userId).orElseThrow(NoUsersWithSuchIdException::new);
-        return itemRepository.findAllByUser(user);
+        return itemRepository.findAllByUser(user).stream().map(ItemMapper::map).toList();
     }
 
     @Transactional

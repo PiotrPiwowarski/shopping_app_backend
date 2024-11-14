@@ -1,6 +1,5 @@
 package com.example.shopping_app_backend.dto;
 
-import com.example.shopping_app_backend.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Authentication {
 
-    private User user;
     private String token;
+    private long userId;
 }
