@@ -41,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
         if(!userName.equals(user.getEmail())) {
             throw new UnauthorizedActionException();
         }
-        userRepository.delete(user);
+        itemRepository.delete(item);
     }
 
     @Override
