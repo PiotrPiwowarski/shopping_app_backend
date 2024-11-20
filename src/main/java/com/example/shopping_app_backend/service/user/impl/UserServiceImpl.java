@@ -10,6 +10,7 @@ import com.example.shopping_app_backend.exceptions.NoUsersWithSuchIdException;
 import com.example.shopping_app_backend.exceptions.UnauthorizedActionException;
 import com.example.shopping_app_backend.exceptions.UserWithSuchEmailAlreadyExists;
 import com.example.shopping_app_backend.mapper.UserMapper;
+import com.example.shopping_app_backend.repository.ItemRepository;
 import com.example.shopping_app_backend.repository.TokenRepository;
 import com.example.shopping_app_backend.repository.UserRepository;
 import com.example.shopping_app_backend.service.jwt.JwtService;
@@ -20,6 +21,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -32,6 +34,7 @@ public class UserServiceImpl implements UserService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final TokenRepository tokenRepository;
+    private final ItemRepository itemRepository;
 
 
     @Override
@@ -71,12 +74,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(long id) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findById(id).orElseThrow(NoUsersWithSuchIdException::new);
         if(!name.equals(user.getEmail())) {
             throw new UnauthorizedActionException();
         }
+        itemRepository.deleteAllByUser(user);
+        tokenRepository.deleteAllByUser(user);
         userRepository.delete(user);
     }
 
