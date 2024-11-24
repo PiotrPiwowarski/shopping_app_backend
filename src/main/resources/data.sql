@@ -1,4 +1,4 @@
-INSERT INTO USERS (email, password, role) VALUES ('Piotr', '$2y$10$iWG0RuDprLM1VJvizMXeVeMTG94izDVnkvRdDJqbNKo8el4iQq8dy', 'USER');
+INSERT INTO USERS (email, password, role) VALUES ('admin@gmail.com', '$2y$10$STKqUJ3v5miGEYFNrb4GyuUItn4s2CJYNMnZ1ZDjQChGh.NjDrFzO', 'USER'); /*password: admin*/
 
 INSERT INTO ITEMS (shop, product_name, price, amount, description, image_url, user_id)
 VALUES ('Example Shop', 'Example Product', 99.99, 1, 'This is a sample item description', 'http://example.com/image.jpg', 1);
