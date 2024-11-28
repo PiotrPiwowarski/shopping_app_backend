@@ -20,6 +20,7 @@ public class ItemMapper {
                 .amount(new BigDecimal(newItem.getAmount()))
                 .description(newItem.getDescription())
                 .imageUrl(newItem.getImageUrl())
+                .bought(false)
                 .user(user)
                 .build();
     }
@@ -33,6 +34,7 @@ public class ItemMapper {
                 .amount(item.getAmount())
                 .description(item.getDescription())
                 .imageUrl(item.getImageUrl())
+                .bought(item.isBought())
                 .userId(item.getUser().getId())
                 .build();
     }

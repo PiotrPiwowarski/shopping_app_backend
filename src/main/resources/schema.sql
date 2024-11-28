@@ -23,6 +23,7 @@ CREATE TABLE ITEMS (
                        amount DECIMAL(19, 2),
                        description VARCHAR(255),
                        image_url VARCHAR(255),
+                       bought boolean,
                        user_id BIGINT,
                        CONSTRAINT fk_items_user FOREIGN KEY (user_id) REFERENCES USERS(id)
 );

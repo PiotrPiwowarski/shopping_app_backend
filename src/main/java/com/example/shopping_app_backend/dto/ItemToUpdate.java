@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Data
 @Builder
-public class ProductToUpdate {
+public class ItemToUpdate {
 
     private long id;
     private String shop;
@@ -19,5 +19,6 @@ public class ProductToUpdate {
     private BigDecimal price;
     private BigDecimal amount;
     private String description;
+    private boolean bought;
     private String imageUrl;
 }

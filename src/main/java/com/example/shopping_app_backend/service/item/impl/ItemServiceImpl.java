@@ -2,7 +2,7 @@ package com.example.shopping_app_backend.service.item.impl;
 
 import com.example.shopping_app_backend.dto.GetItem;
 import com.example.shopping_app_backend.dto.NewItem;
-import com.example.shopping_app_backend.dto.ProductToUpdate;
+import com.example.shopping_app_backend.dto.ItemToUpdate;
 import com.example.shopping_app_backend.entity.Item;
 import com.example.shopping_app_backend.entity.User;
 import com.example.shopping_app_backend.exceptions.NoItemsWithSuchIdException;
@@ -52,18 +52,28 @@ public class ItemServiceImpl implements ItemService {
 
     @Transactional
     @Override
-    public void updateItem(ProductToUpdate productToUpdate) {
+    public void updateItem(ItemToUpdate itemToUpdate) {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        Item item = itemRepository.findById(productToUpdate.getId()).orElseThrow(NoItemsWithSuchIdException::new);
+        Item item = itemRepository.findById(itemToUpdate.getId()).orElseThrow(NoItemsWithSuchIdException::new);
         User user = userRepository.findById(item.getUser().getId()).orElseThrow(NoUsersWithSuchIdException::new);
         if(!userName.equals(user.getEmail())) {
             throw new UnauthorizedActionException();
         }
-        item.setShop(productToUpdate.getShop());
-        item.setProductName(productToUpdate.getProductName());
-        item.setPrice(productToUpdate.getPrice());
-        item.setAmount(productToUpdate.getAmount());
-        item.setDescription(productToUpdate.getDescription());
-        item.setImageUrl(productToUpdate.getImageUrl());
+        item.setShop(itemToUpdate.getShop());
+        item.setProductName(itemToUpdate.getProductName());
+        item.setPrice(itemToUpdate.getPrice());
+        item.setAmount(itemToUpdate.getAmount());
+        item.setDescription(itemToUpdate.getDescription());
+        item.setImageUrl(itemToUpdate.getImageUrl());
+        item.setBought(itemToUpdate.isBought());
+    }
+
+    @Transactional
+    @Override
+    public void buyItem(long id) {
+        Item item = itemRepository.findById(id).orElseThrow(NoItemsWithSuchIdException::new);
+        boolean isBought = !item.isBought();
+        item.setBought(isBought);
+        itemRepository.save(item);
     }
 }

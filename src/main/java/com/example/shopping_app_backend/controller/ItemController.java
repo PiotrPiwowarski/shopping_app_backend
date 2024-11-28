@@ -1,7 +1,7 @@
 package com.example.shopping_app_backend.controller;
 
 import com.example.shopping_app_backend.dto.NewItem;
-import com.example.shopping_app_backend.dto.ProductToUpdate;
+import com.example.shopping_app_backend.dto.ItemToUpdate;
 import com.example.shopping_app_backend.dto.GetItem;
 import com.example.shopping_app_backend.service.item.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,8 +44,15 @@ public class ItemController {
 
     @Operation(summary = "Aktualizacja produktu")
     @PutMapping
-    public ResponseEntity<Void> updateItem(@RequestBody ProductToUpdate productToUpdate) {
-        itemService.updateItem(productToUpdate);
+    public ResponseEntity<Void> updateItem(@RequestBody ItemToUpdate itemToUpdate) {
+        itemService.updateItem(itemToUpdate);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Zakup produktu")
+    @PutMapping("buy/{id}")
+    public ResponseEntity<Void> buyItem(@PathVariable long id) {
+        itemService.buyItem(id);
         return ResponseEntity.ok().build();
     }
 }

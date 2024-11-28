@@ -26,6 +26,7 @@ public class Item {
     private BigDecimal amount;
     private String description;
     private String imageUrl;
+    private boolean bought;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

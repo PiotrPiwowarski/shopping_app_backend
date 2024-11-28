@@ -20,5 +20,6 @@ public class GetItem {
     private BigDecimal amount;
     private String description;
     private String imageUrl;
+    private boolean bought;
     private long userId;
 }
