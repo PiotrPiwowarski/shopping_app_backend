@@ -16,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/items")
 @Tag(name = "Items API")
+@CrossOrigin(origins="*", allowedHeaders = "*")
 public class ItemController {
 
     private final ItemService itemService;
