@@ -1,6 +1,9 @@
-FROM eclipse-temurin:17
-WORKDIR /app
-COPY ./target/shopping_app_backend-0.0.1-SNAPSHOT.jar /app/shopply.jar
+FROM maven:3.8.5-openjdk-17 AS build
+COPY . .
+RUN mvn clean package -DskipTests
+
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=build /target/shopping_app_backend-0.0.1-SNAPSHOT.jar shopping_app_backend.jar
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "shopply.jar"]
+ENTRYPOINT ["java", "-jar", "shopping_app_backend.jar"]
