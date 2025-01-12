@@ -55,4 +55,9 @@ public class ItemController {
         itemService.buyItem(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> testApi() {
+        return ResponseEntity.ok("Test success");
+    }
 }
